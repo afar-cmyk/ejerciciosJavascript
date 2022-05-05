@@ -6,7 +6,7 @@
 // input = ["(0 0)","(1 0)","(1 1)","(0 1)"]
 // output = 1
 
-let entrada = ["(0 0)", "(1 0)", "(1 1)", "(0 1)"];
+let entrada = ["(1 1)", "(1 3)", "(3 1)", "(3 3)"];
 
 function generarCoordenadas(input) {
   // Guarda los datos limpios en una variable
@@ -42,31 +42,26 @@ function generarCoordenadas(input) {
     return desglozar;
   }
 
-  // Funcion que utiliza los datos limpios para calcular el area del rectangulo
   function calcularArea(objeto) {
-    let x = [];
-    let y = [];
-    let u = 0;
+    // Establece la mitad del arreglo
+    let mitad = Math.ceil(objeto.length / 2);
 
-    while (u < objeto.length) {
-      x.push(parseInt(objeto[u][0]));
-      y.push(parseInt(objeto[u][1]));
-      u++;
+    // Establece un conjunto de arreglos denominados ancho y alto
+    const ancho = objeto.slice(0, mitad);
+    const alto = objeto.slice(-mitad);
+
+    // Algoritmo que devuelve el tamaño de las coordenadas ingresadas
+    function calcularTamaño([primera, segunda]) {
+      return Math.sqrt(
+        Math.pow(primera[0] - segunda[0], 2) +
+          Math.pow(primera[1] - segunda[1], 2)
+      );
     }
 
-    function generarMedia(arreglo) {
-      let total = 0;
-      for (let valor of arreglo) {
-        total += valor;
-      }
-      let media = total / arreglo.length;
-      return media;
-    }
+    let tamañoAncho = calcularTamaño(ancho);
+    let tamañoAlto = calcularTamaño(alto);
 
-    let mediaX = generarMedia(x);
-    let mediaY = generarMedia(y);
-
-    let areaRectangulo = parseInt(mediaX * mediaY);
+    let areaRectangulo = parseInt(tamañoAncho * tamañoAlto);
 
     return areaRectangulo;
   }
