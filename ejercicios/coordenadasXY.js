@@ -1,12 +1,8 @@
-// Find Area of a rectangle with given X and Y coordinates
-// Encuentra el area de un rectangulo con las coordenadas ingresadas
+// Genera coordenadas X y Y partiendo de un arreglo ingresado
 // input = ["(1 1)", "(1 3)", "(3 1)", "(3 3)"]
-// output = 4
-//
-// input = ["(0 0)","(1 0)","(1 1)","(0 1)"]
-// output = 1
+// output = [ { x: 1, y: 1 }, { x: 1, y: 3 }, { x: 3, y: 1 }, { x: 3, y: 3 } ]
 
-let entrada = ["(0 0)", "(1 0)", "(1 1)", "(0 1)"];
+let entrada = ["(1 1)", "(1 3)", "(3 1)", "(3 3)"];
 
 function generarCoordenadas(input) {
   // Guarda los datos limpios en una variable
@@ -42,36 +38,21 @@ function generarCoordenadas(input) {
     return desglozar;
   }
 
-  // Funcion que utiliza los datos limpios para calcular el area del rectangulo
-  function calcularArea(objeto) {
-    let x = [];
-    let y = [];
+  // Funcion que utiliza los datos limpios para devolver un arreglo de coordenadas X y Y
+  function crearCoordenadas(objeto) {
+    let coordenadas = [];
     let u = 0;
-
     while (u < objeto.length) {
-      x.push(parseInt(objeto[u][0]));
-      y.push(parseInt(objeto[u][1]));
+      coordenadas.push({
+        x: parseInt(objeto[u][0]),
+        y: parseInt(objeto[u][1]),
+      });
       u++;
     }
-
-    function generarMedia(arreglo) {
-      let total = 0;
-      for (let valor of arreglo) {
-        total += valor;
-      }
-      let media = total / arreglo.length;
-      return media;
-    }
-
-    let mediaX = generarMedia(x);
-    let mediaY = generarMedia(y);
-
-    let areaRectangulo = parseInt(mediaX * mediaY);
-
-    return areaRectangulo;
+    return coordenadas;
   }
 
-  return calcularArea(inputLimpio);
+  return crearCoordenadas(inputLimpio);
 }
 
 console.log(generarCoordenadas(entrada));
